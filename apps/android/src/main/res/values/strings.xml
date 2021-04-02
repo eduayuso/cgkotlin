@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="app_name">Computational Geometry with Kotlin</string>
+
+    <string name="title_user_list">Friends</string>
+    <string name="title_post_list">Feed</string>
+    <string name="title_tag_list">Tags</string>
+
+    <string name="user_detail">User info</string>
+    <string name="error_fetching_user_details">Error retrieving user details</string>
+
+    <string name="post_detail">Post detail</string>
+    <string name="error_fetching_post_details">Error retrieving post details</string>
+
+    <string name="tag_detail">Posts tagged</string>
+    <string name="error_fetching_tag_details">Error retrieving tag details</string>
+
+</resources>
