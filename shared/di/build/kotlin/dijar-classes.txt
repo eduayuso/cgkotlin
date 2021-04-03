@@ -1,1 +1,0 @@
-C:\Users\Edu\GITHUB\CGKotlin\shared\di\build\classes\kotlin\main\dev\eduayuso\cgkotlin\shared\di\SharedFactory$dataManager$2.class;C:\Users\Edu\GITHUB\CGKotlin\shared\di\build\classes\kotlin\main\dev\eduayuso\cgkotlin\shared\di\SharedFactory.class
