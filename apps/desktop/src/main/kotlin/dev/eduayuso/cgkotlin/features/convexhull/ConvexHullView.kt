@@ -1,10 +1,10 @@
 package dev.eduayuso.cgkotlin.features.convexhull
 
-import dev.eduayuso.cgkotlin.components.CGUtil
 import dev.eduayuso.cgkotlin.shared.di.SharedFactory
 import dev.eduayuso.cgkotlin.shared.domain.algorithms.IConvexHullAlgorithm
 import dev.eduayuso.cgkotlin.shared.domain.algorithms.IConvexHullTaskListener
 import dev.eduayuso.cgkotlin.shared.domain.entities.PointSetEntity
+import dev.eduayuso.cgkotlin.shared.presentation.CGUtil
 import dev.eduayuso.cgkotlin.shared.presentation.features.convexhull.IConvexHullEvents
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType

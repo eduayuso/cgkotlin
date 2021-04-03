@@ -1,6 +1,8 @@
 package dev.eduayuso.cgkotlin.features.convexhull
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import dev.eduayuso.cgkotlin.R
@@ -10,6 +12,7 @@ import dev.eduayuso.cgkotlin.shared.di.SharedFactory
 import dev.eduayuso.cgkotlin.shared.domain.algorithms.IConvexHullAlgorithm
 import dev.eduayuso.cgkotlin.shared.domain.algorithms.IConvexHullTaskListener
 import dev.eduayuso.cgkotlin.shared.domain.entities.PointSetEntity
+import dev.eduayuso.cgkotlin.shared.presentation.CGUtil
 import dev.eduayuso.cgkotlin.shared.presentation.features.convexhull.IConvexHullEvents
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -47,13 +50,15 @@ class ConvexHullActivity:
 
             GlobalScope.launch(Dispatchers.Main) {
 
-              /*  status.clear()
-                status.writeLog("Running algorithm ...")
+                Log.d("RUNNING","Running algorithm ...")
                 val totalTime = System.currentTimeMillis() - startTime
-                status.writeLog("Time elapsed: ${CGUtil.parseTime(totalTime)}")
+                Log.d("RUNNING","Time elapsed: ${CGUtil.parseTime(totalTime)}")
 
                 output?.let { onExtremePointsFound(it) }
-                helper?.let { canvas.drawHelperLines(it, Color.BLUE) }*/
+                helper?.let {
+                    canvas.helperPoints = it
+                    canvas.invalidate()
+                }
             }
         }
 
@@ -119,6 +124,8 @@ class ConvexHullActivity:
 
     override fun onStartRunningAlgorithm() {
 
+        canvas.helperPoints = null
+        canvas.invalidate()
     }
 
     override fun onValidationFailed() {
