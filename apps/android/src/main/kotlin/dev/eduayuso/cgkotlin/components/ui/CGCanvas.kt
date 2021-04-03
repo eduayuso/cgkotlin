@@ -17,18 +17,20 @@ class CGCanvas
 
 ) : View(context, attrs, defStyleAttr) {
 
+    var points: PointSetEntity? = null
+    var helperPoints: PointSetEntity? = null
+    private var pointRadius = 8f
+
+    private fun pointStyle(isExtreme: Boolean) =
+        Paint().apply { color = if (isExtreme) Color.GREEN else Color.RED}
+
     override fun onDraw(canvas: Canvas?) {
 
         super.onDraw(canvas)
         this.drawPointSet(canvas)
+        this.drawExtremeEdges(canvas)
+        this.drawHelperLines(canvas)
     }
-
-    var points: PointSetEntity? = null
-
-    private var pointRadius = 8f
-
-    private fun pointStyle(isExtreme: Boolean) =
-            Paint().apply { color = if (isExtreme) Color.GREEN else Color.RED}
 
     private fun drawPointSet(canvas: Canvas?) {
 
@@ -39,35 +41,59 @@ class CGCanvas
                 pointRadius,
                 pointStyle(it.isExtreme))
         }
+    }
 
-        points?.list?.filter { it.isExtreme }?.let {
-            list ->
-                if (list.isNotEmpty()) {
-                    drawExtremeEdges(canvas, list, Color.GREEN)
+    private fun drawExtremeEdges(canvas: Canvas?) {
+
+        val segmentStyle = Paint().apply {
+            Color.GREEN
+            strokeWidth = 4.0F
+        }
+
+        points?.list?.filter { it.isExtreme }?.let { list ->
+
+            if (list.isNotEmpty()) {
+                list.forEach { p1 ->
+                    p1.successor?.let { p2 ->
+                        drawLine(canvas, p1, p2, segmentStyle)
+                    }
                 }
+            }
         }
     }
 
-    private fun drawExtremeEdges(canvas: Canvas?, points: List<PointEntity>, color: Int) {
+    private fun drawLine(canvas: Canvas?, p1: PointEntity, p2: PointEntity, segmentStyle: Paint) {
 
-        val segmentStyle = Paint().apply { color }
-
-        points.forEach {
-
-            p1 ->
-            p1.successor?.let { p2 ->
-                canvas?.drawLine(
-                    normalizeValue(p1.x, this.width),
-                    normalizeValue(p1.y, this.height),
-                    normalizeValue(p2.x, this.width),
-                    normalizeValue(p2.y, this.height),
-                    segmentStyle
-                )
-            }
-        }
+        canvas?.drawLine(
+            normalizeValue(p1.x, this.width),
+            normalizeValue(p1.y, this.height),
+            normalizeValue(p2.x, this.width),
+            normalizeValue(p2.y, this.height),
+            segmentStyle
+        )
     }
 
     private fun normalizeValue(value: Float, max: Int) =
 
         pointRadius + (value * (max - pointRadius*2))
+
+    private fun drawHelperLines(canvas: Canvas?) {
+
+        val segmentStyle = Paint().apply {
+            Color.BLUE
+            strokeWidth = 30.0F
+        }
+
+        this.helperPoints?.let {
+            if (it.list.size == 3) {
+                this.drawLine(canvas, it.list[0], it.list[1], segmentStyle)
+                this.drawLine(canvas, it.list[1], it.list[2], segmentStyle)
+                this.drawLine(canvas, it.list[2], it.list[0], segmentStyle)
+
+                // Else: single line
+            } else {
+                this.drawLine(canvas, it.list[0], it.list[1], segmentStyle)
+            }
+        }
+    }
 }

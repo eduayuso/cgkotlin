@@ -1,4 +1,4 @@
-package dev.eduayuso.cgkotlin.components
+package dev.eduayuso.cgkotlin.shared.presentation
 
 object CGUtil {
 
