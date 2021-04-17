@@ -36,4 +36,19 @@ object AlgorithmUtil {
 
         return ltl
     }
+
+    /**
+     * Returns 1 if polar angle between p0 and a is greater than between p0 and b, else -1
+     */
+    fun polarAngleComparator(p0: PointEntity, a: PointEntity, b: PointEntity): Int {
+
+    /*    val deltaY = kotlin.math.abs(a.y - b.y)
+        val deltaX = kotlin.math.abs(a.x - b.x)
+        return Math.toDegrees(kotlin.math.atan2(deltaY.toDouble(), deltaX.toDouble()))*/
+
+        val cotanA = -(a.x - p0.x) / (a.y - p0.y)
+        val cotanB = -(b.x - p0.x) / (b.y - p0.y)
+        return if (cotanA - cotanB < 0) 1
+        else -1
+    }
 }

@@ -3,6 +3,7 @@ package dev.eduayuso.cgkotlin.shared.impl.services
 import dev.eduayuso.cgkotlin.shared.data.services.IConvexHullService
 import dev.eduayuso.cgkotlin.shared.impl.DataConstants
 import dev.eduayuso.cgkotlin.shared.impl.algorithms.convexhull.ExtremeEdgesToLeftAlgorithm
+import dev.eduayuso.cgkotlin.shared.impl.algorithms.convexhull.GrahamScanAlgorithm
 import dev.eduayuso.cgkotlin.shared.impl.algorithms.convexhull.InTriangleAlgorithm
 import dev.eduayuso.cgkotlin.shared.impl.algorithms.convexhull.JarvisMarchAlgorithm
 
@@ -14,6 +15,7 @@ class ConvexHullService: IConvexHullService() {
 
         names.inTriangleTest        to InTriangleAlgorithm,
         names.extremeEdgeToLeftTest to ExtremeEdgesToLeftAlgorithm,
-        names.jarvisMarch           to JarvisMarchAlgorithm
+        names.jarvisMarch           to JarvisMarchAlgorithm,
+        names.grahamScan            to GrahamScanAlgorithm
     )
 }

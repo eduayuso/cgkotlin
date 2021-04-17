@@ -7,5 +7,6 @@ object DataConstants {
         const val inTriangleTest        = "In Triangle Test"
         const val extremeEdgeToLeftTest = "Extreme Edges - To Left Test"
         const val jarvisMarch           = "Jarvis March"
+        const val grahamScan            = "Graham Scan"
     }
 }
