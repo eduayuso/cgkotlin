@@ -34,76 +34,115 @@ object GrahamScanAlgorithm: IConvexHullAlgorithm {
 
     override val stepOption = true
 
-    var s0: Int? = null
     val stackS: Stack<PointEntity> = Stack()
     val stackT: Stack<PointEntity> = Stack()
 
+    /**
+     * Vars only for steps
+     */
+    var stepping = false
+    var s0: Int? = null // first point
+    var sn: Int = 0 // stackS index
+    var tn: Int = 0 // stackT index
+
     override fun run(input: PointSetEntity, listener: IConvexHullTaskListener) {
+
+        this.reset()
+        input.reset()
 
         preprocessing(input)
         while (stackT.isNotEmpty()) scan()
 
-        for (s in 0 until stackS.size) {
-            if (s < stackS.size-1) {
-                stackS[s].successor = stackS[s + 1]
-            } else {
-                stackS[s].successor = stackS[0]
-            }
-        }
+        // We join the last point to the first, so we close the convex hull
+        stackS.lastElement().successor = stackS.firstElement()
 
-        val extremePoints = PointSetEntity(stackS.toList())
-        listener.onFinish(extremePoints)
+        // Present result (all points are references, so 'input' contains the points updated as extreme)
+        listener.onFinish(input)
     }
 
     private fun preprocessing(input: PointSetEntity) {
 
+        // First we search the lowerAndThenLeftMost point: p0
         val s0 = AlgorithmUtil.lowerThenLeftMost(input)
-        val sortedList = input.list.sortedWith {
-            a, b -> AlgorithmUtil.polarAngleComparator(input.list[s0], a, b)
+        val p0 = input.list[s0]
+
+        // The other points (all but p0) is ordered according to the polar angle of the vector from p0 to each point.
+        val inputButP0 = input.list.filter { it != p0 }
+        val sortedList = inputButP0.sortedWith {
+            a, b -> AlgorithmUtil.polarAngleComparator(p0, a, b)
         }
 
+        // We build a stack pushing the ordered points but
         sortedList.forEach { stackT.push(it) }
-        stackS.push(input.list[s0].apply { isExtreme = true })
-        stackS.push(stackT.pop()) // s1
+
+        // Our first extreme point is p0 and the first of the ordered list (p1)
+        p0.apply { isExtreme = true }
+        val p1 = stackT.pop().apply { isExtreme = true }
+
+        // We have the first extreme edge: s0->s1
+        // Stack S holds the candidate extreme points. The first elements pushed are s0 and s1
+        // Stack T holds the rest of the points pushed in order
+        stackS.push(p0)
+        stackS.push(p1)
+        p0.successor = p1
     }
 
     private fun scan() {
 
+        // We take two points from the top of S and do a leftTest with the first point from top of T.
         val s0 = stackS.peek()
         val s1 = stackS.elementAt(stackS.size-2)
         val p  = stackT.peek()
 
+        // If test returns true -> pop from T -> push popped point to S
+        // If test returns false -> pop from S (discard candidate)
         if (AlgorithmUtil.toLeft(s1, s0, p)) {
-            val point = stackT.pop().apply { isExtreme = true }
-            stackS.push(point)
+            val point = stackT.pop()
+            if (!stackS.contains(point)) {
+                stackS.push(point.apply { isExtreme = true })
+                s0.successor = p
+            }
 
         } else {
-            stackS.pop()
+            s0.successor = null
+            stackS.pop().isExtreme = false
         }
     }
 
+    /**
+     * This method shows the process step by step
+     */
     override fun step(input: PointSetEntity, listener: IConvexHullTaskListener) {
 
-        if (stackS.isEmpty() && stackT.isEmpty()) {
-
+        if (!stepping || stackT.isEmpty()) {
+            this.reset()
+            input.reset()
+            stepping = true
             s0 = AlgorithmUtil.lowerThenLeftMost(input)
-            val sortedList = input.list.sortedWith {
-                    a, b -> AlgorithmUtil.polarAngleComparator(input.list[s0!!], a, b)
-            }
-
-            sortedList.forEach { stackT.push(it) }
+            preprocessing(input)
         }
 
         val p0 = input.list[s0!!]
-        val pn = stackT.pop()
+        val pn = stackT.peek()
 
-        val helper = PointSetEntity(listOf(p0, pn))
+        scan()
 
-        listener.onStep(helper, input)
+        if (!stackT.isEmpty()) {
+            val helper = PointSetEntity(listOf(p0, pn))
+            listener.onStep(helper, input)
+        } else {
+            // We join the last point to the first, so we close the convex hull
+            stackS.lastElement().successor = stackS.firstElement()
+            listener.onFinish(input)
+        }
     }
 
     override fun reset() {
 
+        stepping = false
+        s0 = null
+        sn = 0
+       // tn = 0
         stackS.clear()
         stackT.clear()
     }

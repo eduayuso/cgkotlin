@@ -4,4 +4,13 @@ open class PointSetEntity(
 
     val list: List<PointEntity>
 
-): IEntity
+): IEntity {
+
+    fun reset() {
+
+        list.forEach {
+            it.isExtreme = false
+            it.successor = null
+        }
+    }
+}
