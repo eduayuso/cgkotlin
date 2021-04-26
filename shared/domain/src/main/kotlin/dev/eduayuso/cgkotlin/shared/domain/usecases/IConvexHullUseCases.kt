@@ -8,23 +8,17 @@ interface IConvexHullUseCases: IUseCases {
 
     fun getAlgorithmList(): List<String>
 
-    fun providePointSet(): PointSetEntity
+    fun getAlgorithm(selection: String): IConvexHullAlgorithm
 
     fun createRandomPointSet(max: Int): PointSetEntity
 
-    fun resetPointSet()
-
-    fun editPointSet()
-
-    fun getAlgorithm(selection: String): IConvexHullAlgorithm
-
     suspend fun runConvexHullAlgorithm(
-        algorithm: IConvexHullAlgorithm,
-        points: PointSetEntity,
-        listener: IConvexHullTaskListener)
+            algorithm: IConvexHullAlgorithm,
+            points: PointSetEntity,
+            listener: IConvexHullTaskListener)
 
     fun stepConvexHullAlgorithm(
-        algorithm: IConvexHullAlgorithm,
-        points: PointSetEntity,
-        listener: IConvexHullTaskListener)
+            algorithm: IConvexHullAlgorithm,
+            points: PointSetEntity,
+            listener: IConvexHullTaskListener)
 }

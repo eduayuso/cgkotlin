@@ -1,10 +1,10 @@
 package dev.eduayuso.cgkotlin.shared.domain.algorithms
 
-interface IAlgorithmTaskListener<Type> {
+interface IAlgorithmTaskListener<InputType, OutputType> {
 
-    fun onStart(input: Type)
+    fun onStart(input: InputType)
 
-    fun onStep(helper: Type?, output: Type?)
+    fun onStep(helper: InputType?, output: OutputType?)
 
-    fun onFinish(output: Type)
+    fun onFinish(output: OutputType)
 }

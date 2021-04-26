@@ -20,10 +20,6 @@ class ConvexHullInteractor(
 
         this.data.convexHull.algorithms[selection]!!
 
-    override fun providePointSet(): PointSetEntity {
-        TODO("Not yet implemented")
-    }
-
     override fun createRandomPointSet(max: Int): PointSetEntity {
 
         var list = emptyList<PointEntity>().toMutableList()
@@ -33,28 +29,20 @@ class ConvexHullInteractor(
         return PointSetEntity(list)
     }
 
-    fun randomValue() = Math.random().toFloat()
-
-    override fun resetPointSet() {
-        TODO("Not yet implemented")
-    }
-
-    override fun editPointSet() {
-        TODO("Not yet implemented")
-    }
+    private fun randomValue() = Math.random().toFloat()
 
     override suspend fun runConvexHullAlgorithm(
-        algorithm: IConvexHullAlgorithm,
-        points: PointSetEntity,
-        listener: IConvexHullTaskListener) {
+            algorithm: IConvexHullAlgorithm,
+            points: PointSetEntity,
+            listener: IConvexHullTaskListener) {
 
         algorithm.run(points, listener)
     }
 
     override fun stepConvexHullAlgorithm(
-        algorithm: IConvexHullAlgorithm,
-        points: PointSetEntity,
-        listener: IConvexHullTaskListener) {
+            algorithm: IConvexHullAlgorithm,
+            points: PointSetEntity,
+            listener: IConvexHullTaskListener) {
 
         algorithm.step(points, listener)
     }

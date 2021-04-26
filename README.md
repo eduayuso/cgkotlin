@@ -7,6 +7,14 @@ Android and desktop apps to play with cg algorithms.
 * [x] Jarvis March - Gift Wrapping. O(n^2)
 * [x] Graham Scan. O(n*logn)
 
-#### Lines intersection
+#### Segments lines intersection
+* [x] Brute Force
+* [ ] Sweep line - Bentley and Ottman algorithm
+
+#### Geometric intersection
+* [ ] Convex polygon intersection detection
+* [ ] Edge chasing
+* [ ] Plane sweeping
+* [ ] Halfplane intesection construction
 
 #### Voronoi diagrams
