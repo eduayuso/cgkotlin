@@ -8,8 +8,8 @@ Android and desktop apps to play with cg algorithms.
 * [x] Graham Scan. O(n*logn)
 
 #### Segments lines intersection
-* [x] Brute Force
-* [ ] Sweep line - Bentley and Ottman algorithm
+* [x] Brute Force. O(n^2)
+* [ ] Sweep line - Bentley and Ottman algorithm. O(n*logn)
 
 #### Geometric intersection
 * [ ] Convex polygon intersection detection
