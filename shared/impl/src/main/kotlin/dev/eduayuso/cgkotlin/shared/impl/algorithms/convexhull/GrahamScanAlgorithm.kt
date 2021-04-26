@@ -5,7 +5,6 @@ import dev.eduayuso.cgkotlin.shared.domain.algorithms.IConvexHullTaskListener
 import dev.eduayuso.cgkotlin.shared.domain.entities.PointEntity
 import dev.eduayuso.cgkotlin.shared.domain.entities.PointSetEntity
 import dev.eduayuso.cgkotlin.shared.impl.algorithms.AlgorithmUtil
-import java.awt.Point
 import java.util.*
 
 /**

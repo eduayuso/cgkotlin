@@ -1,6 +1,6 @@
 package dev.eduayuso.cgkotlin.shared.domain.entities
 
-open class PointSetEntity(
+data class PointSetEntity(
 
     val list: List<PointEntity>
 

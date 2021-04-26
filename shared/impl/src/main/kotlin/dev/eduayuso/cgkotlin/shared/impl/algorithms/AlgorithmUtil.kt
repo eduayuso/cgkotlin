@@ -2,6 +2,7 @@ package dev.eduayuso.cgkotlin.shared.impl.algorithms
 
 import dev.eduayuso.cgkotlin.shared.domain.entities.PointEntity
 import dev.eduayuso.cgkotlin.shared.domain.entities.PointSetEntity
+import dev.eduayuso.cgkotlin.shared.domain.entities.SegmentEntity
 
 object AlgorithmUtil {
 
@@ -50,5 +51,37 @@ object AlgorithmUtil {
         val cotanB = -(b.x - p0.x) / (b.y - p0.y)
         return if (cotanA - cotanB < 0) 1
         else -1
+    }
+
+    /**
+     * ------------------------------------------------------------------------------------
+     * First we find the lines intersection according to the formula:
+     * LineP => y1 = m1*x1 + c1
+     * LineQ => y2 = m2*x2 + c2
+     * The point x,y where intersects is the one who assert this:
+     * y1 = y2 and x1 = x2
+     * ------------------------------------------------------------------------------------
+     * Second, we check if the intersection point is inside the two segments
+     */
+    fun findIntersection(p: SegmentEntity, q: SegmentEntity): PointEntity? {
+
+        /**
+         * First we find the lines intersection
+         */
+        val lineP = p.toLine()
+        val lineQ = q.toLine()
+
+        val x = (lineQ.yIntercept - lineP.yIntercept) / (lineP.slope - lineQ.slope)
+        val y = lineP.slope * x + lineP.yIntercept
+
+        /**
+         * Second, we check if the intersection point is inside the two segments
+         */
+        val i = PointEntity(x, y)
+        if (p.isPointInsideBox(i) && q.isPointInsideBox(i)) {
+            return i
+        } else {
+            return null
+        }
     }
 }

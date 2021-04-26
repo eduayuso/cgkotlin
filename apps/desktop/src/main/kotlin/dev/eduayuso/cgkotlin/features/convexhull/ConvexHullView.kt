@@ -1,5 +1,7 @@
 package dev.eduayuso.cgkotlin.features.convexhull
 
+import dev.eduayuso.cgkotlin.components.CanvasView
+import dev.eduayuso.cgkotlin.components.StatusView
 import dev.eduayuso.cgkotlin.shared.di.SharedFactory
 import dev.eduayuso.cgkotlin.shared.domain.algorithms.IConvexHullAlgorithm
 import dev.eduayuso.cgkotlin.shared.domain.algorithms.IConvexHullTaskListener
@@ -16,13 +18,18 @@ import tornadofx.*
 
 class ConvexHullView:
 
-    View("Computational Geometry with Kotlin"), IConvexHullEvents {
+    Fragment("Convex Hull"),
+    IConvexHullEvents {
 
     val presenter by lazy {
         SharedFactory.createConvexHullPresenter().apply {
             listener = this@ConvexHullView
         }
     }
+
+    val form: ConvexHullFormView by inject()
+    val status: ConvexHullStatusView by inject()
+    val canvas: ConvexHullCanvasView by inject()
 
     val listener = object: IConvexHullTaskListener {
 
@@ -56,10 +63,6 @@ class ConvexHullView:
             }
         }
     }
-
-    val form: ConvexHullFormView by inject()
-    val status: ConvexHullStatusView by inject()
-    val canvas: ConvexHullCanvasView by inject()
 
     init {
 

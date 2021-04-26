@@ -2,7 +2,6 @@ package dev.eduayuso.cgkotlin.shared.domain.algorithms
 
 import dev.eduayuso.cgkotlin.shared.domain.entities.PointSetEntity
 
-interface IConvexHullAlgorithm:
+interface IConvexHullAlgorithm: IAlgorithm<PointSetEntity, IConvexHullTaskListener>
 
-    IAlgorithm<PointSetEntity, IConvexHullTaskListener> {
-}
+interface IConvexHullTaskListener: IAlgorithmTaskListener<PointSetEntity, PointSetEntity>

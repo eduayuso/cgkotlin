@@ -6,7 +6,13 @@ object DataConstants {
 
         const val inTriangleTest        = "In Triangle Test"
         const val extremeEdgeToLeftTest = "Extreme Edges - To Left Test"
-        const val jarvisMarch           = "Jarvis March"
+        const val jarvisMarch           = "Jarvis March - Gift Wrapping"
         const val grahamScan            = "Graham Scan"
+    }
+
+    object SegmentIntersectionAlgorithms {
+
+        const val bruteForce            = "Brute Force"
+        const val sweepLine             = "Bentley & Ottman - Sweep Line"
     }
 }

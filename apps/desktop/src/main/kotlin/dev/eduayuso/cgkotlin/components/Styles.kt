@@ -6,17 +6,25 @@ import tornadofx.Stylesheet
 import tornadofx.box
 import tornadofx.cssclass
 import tornadofx.px
+import java.awt.Font.BOLD
 
 class Styles : Stylesheet() {
 
     companion object {
 
+        val title by cssclass()
         val heading by cssclass()
         val boxWithBorder by cssclass()
         val paneBackground by cssclass()
     }
 
     init {
+
+        label {
+            size = 18.px
+            fontWeight = FontWeight.BOLD
+            padding = box(4.px)
+        }
 
         label {
             padding = box(4.px)
