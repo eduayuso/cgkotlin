@@ -13,18 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
 
-        <activity android:name=".features.MainActivity">
-
+        <activity
+            android:label="Computational Geometry with Kotlin"
+            android:name=".features.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
             android:label="Convex Hull"
             android:name=".features.convexhull.ConvexHullActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
 
+        <activity
+            android:label="Segment Intersection"
+            android:name=".features.segmentintersection.SegmentIntersectionActivity">
         </activity>
 
     </application>

@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 import dev.eduayuso.cgkotlin.shared.domain.entities.PointEntity
 import dev.eduayuso.cgkotlin.shared.domain.entities.PointSetEntity
+import dev.eduayuso.cgkotlin.shared.domain.entities.SegmentSetEntity
 
 class CGCanvas
     @JvmOverloads constructor(
@@ -18,6 +19,7 @@ class CGCanvas
 ) : View(context, attrs, defStyleAttr) {
 
     var points: PointSetEntity? = null
+    var segments: SegmentSetEntity? = null
     var helperPoints: PointSetEntity? = null
     private var pointRadius = 8f
 
@@ -30,6 +32,7 @@ class CGCanvas
         this.drawPointSet(canvas)
         this.drawExtremeEdges(canvas)
         this.drawHelperLines(canvas)
+        this.drawSegments(canvas)
     }
 
     private fun drawPointSet(canvas: Canvas?) {
@@ -71,6 +74,21 @@ class CGCanvas
             normalizeValue(p2.y, this.height),
             segmentStyle
         )
+    }
+
+    private fun drawSegments(canvas: Canvas?) {
+
+        val segmentStyle = Paint().apply {
+            Color.GREEN
+            strokeWidth = 3.0F
+        }
+
+        segments?.list?.let { list ->
+
+            list.forEach { segment ->
+                drawLine(canvas, segment.a, segment.b, segmentStyle)
+            }
+        }
     }
 
     private fun normalizeValue(value: Float, max: Int) =

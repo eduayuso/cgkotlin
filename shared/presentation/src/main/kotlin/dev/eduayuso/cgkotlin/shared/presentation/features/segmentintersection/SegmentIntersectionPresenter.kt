@@ -63,7 +63,7 @@ class SegmentIntersectionPresenter(
         }
     }
 
-    fun findIntersectionssByStep(listener: ISegmentIntersectionTaskListener) {
+    fun findIntersectionsByStep(listener: ISegmentIntersectionTaskListener) {
 
         interactor.stepSegmentIntersectionAlgorithm(selectedAlgorithm!!, segmentSet!!, listener)
     }
