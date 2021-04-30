@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import dev.eduayuso.cgkotlin.R
 import dev.eduayuso.cgkotlin.features.convexhull.ConvexHullActivity
+import dev.eduayuso.cgkotlin.features.segmentintersection.SegmentIntersectionActivity
 
 class MainActivity: AppCompatActivity() {
 
@@ -19,6 +20,13 @@ class MainActivity: AppCompatActivity() {
 
         Intent(this, ConvexHullActivity::class.java).let {
             intent -> startActivity(intent)
+        }
+    }
+
+    fun onSegmentIntersectionButtonClick(view: View) {
+
+        Intent(this, SegmentIntersectionActivity::class.java).let {
+                intent -> startActivity(intent)
         }
     }
 }

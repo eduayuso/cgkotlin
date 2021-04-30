@@ -98,7 +98,7 @@ class SegmentIntersectionFormView: View() {
                             useMaxWidth = true
                             hgrow = Priority.ALWAYS
                             action {
-                                presenter.findIntersectionssByStep(listener)
+                                presenter.findIntersectionsByStep(listener)
                             }
                         }.apply { hide()  }
             }
