@@ -24,7 +24,7 @@ object ExtremeEdgesToLeftAlgorithm: IConvexHullAlgorithm {
                 checkEdge(points, n, p, q)
             }
 
-            listener.onStep(null, null)
+            listener.onStep(null, null, null)
         }
 
         val extremePoints = PointSetEntity(points)

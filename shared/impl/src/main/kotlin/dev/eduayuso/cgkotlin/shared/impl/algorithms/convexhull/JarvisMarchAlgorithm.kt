@@ -37,7 +37,7 @@ object JarvisMarchAlgorithm: IConvexHullAlgorithm {
             points[k].successor = points[s]
             k = s
 
-            listener.onStep(null, null)
+            listener.onStep(null, null, null)
 
         } while (k != ltl)
 
@@ -71,7 +71,7 @@ object JarvisMarchAlgorithm: IConvexHullAlgorithm {
             if (tt != k && s > -1) {
                 val helper = PointSetEntity(listOf(points[k], points[s]))
                 val extreme = PointSetEntity(input.list)
-                listener.onStep(helper, extreme)
+                listener.onStep(helper, extreme, null)
             }
 
             if (tt != k && (s == -1 || !AlgorithmUtil.toLeft(input, k, s, tt))) {

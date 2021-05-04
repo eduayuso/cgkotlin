@@ -8,7 +8,7 @@ class ConvexHullListener: IConvexHullTaskListener {
     override fun onStart(input: PointSetEntity) {
     }
 
-    override fun onStep(helper:PointSetEntity?, output: PointSetEntity?) {
+    override fun onStep(helper:PointSetEntity?, output: PointSetEntity?, extra: Float?) {
     }
 
     override fun onFinish(output: PointSetEntity) {

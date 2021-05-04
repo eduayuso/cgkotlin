@@ -128,7 +128,7 @@ object GrahamScanAlgorithm: IConvexHullAlgorithm {
 
         if (!stackT.isEmpty()) {
             val helper = PointSetEntity(listOf(p0, pn))
-            listener.onStep(helper, input)
+            listener.onStep(helper, input, null)
         } else {
             // We join the last point to the first, so we close the convex hull
             stackS.lastElement().successor = stackS.firstElement()

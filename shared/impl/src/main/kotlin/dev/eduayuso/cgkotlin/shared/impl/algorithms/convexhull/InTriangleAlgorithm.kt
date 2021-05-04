@@ -39,7 +39,7 @@ object InTriangleAlgorithm: IConvexHullAlgorithm {
                 }
             }
 
-            listener.onStep(null, null)
+            listener.onStep(null, null, null)
         }
 
         listener.onFinish(input)
@@ -91,7 +91,7 @@ object InTriangleAlgorithm: IConvexHullAlgorithm {
             listener.onFinish(extremePoints)
         } else {
             val triangle = PointSetEntity(listOf(points[p], points[q], points[r]))
-            listener.onStep(triangle, extremePoints)
+            listener.onStep(triangle, extremePoints, null)
         }
     }
 

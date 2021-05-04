@@ -29,7 +29,7 @@ object BruteForceAlgorithm: ISegmentIntersectionAlgorithm {
                     }
                 }
             }
-            listener.onStep(null, null)
+            listener.onStep(null, null, null)
         }
 
         listener.onFinish(PointSetEntity(output))

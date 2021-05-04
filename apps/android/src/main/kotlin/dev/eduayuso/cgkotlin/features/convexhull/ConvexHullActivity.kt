@@ -45,7 +45,7 @@ class ConvexHullActivity:
             startTime = System.currentTimeMillis()
         }
 
-        override fun onStep(helper: PointSetEntity?, output: PointSetEntity?) {
+        override fun onStep(helper: PointSetEntity?, output: PointSetEntity?, extra: Float) {
 
             GlobalScope.launch(Dispatchers.Main) {
 

@@ -41,7 +41,7 @@ class SegmentIntersectionView:
             startTime = System.currentTimeMillis()
         }
 
-        override fun onStep(helper: SegmentSetEntity?, output: PointSetEntity?) {
+        override fun onStep(helper: SegmentSetEntity?, output: PointSetEntity?, extra: Float?) {
 
             GlobalScope.launch(Dispatchers.Main) {
 
@@ -50,8 +50,8 @@ class SegmentIntersectionView:
                 val totalTime = System.currentTimeMillis() - startTime
                 status.writeLog("Time elapsed: ${CGUtil.parseTime(totalTime)}")
 
-              /*  output?.let { onIntersectionsFound(it, null) }
-                helper?.let { canvas.dragSegments(it, Color.BLUE) }*/
+                //output?.let { onIntersectionsFound(it, output!!) }
+                extra?.let { canvas.drawSweepLine(it) }
             }
         }
 

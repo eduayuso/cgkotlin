@@ -7,6 +7,7 @@ import dev.eduayuso.cgkotlin.shared.domain.entities.SegmentSetEntity
 import javafx.scene.Group
 import javafx.scene.layout.Priority
 import javafx.scene.paint.Color
+import javafx.scene.shape.Line
 import tornadofx.*
 
 abstract class CanvasView<T>: View() {
@@ -26,6 +27,11 @@ abstract class CanvasView<T>: View() {
     val maxHeight get() = root.height * 0.8
 
     abstract fun draw(set: T)
+
+    fun clear() {
+
+        pointsGroup.children.clear()
+    }
 
     protected fun drawPoint(point: PointEntity, r: Double, color: Color) {
 
@@ -47,7 +53,7 @@ abstract class CanvasView<T>: View() {
         }
     }
 
-    protected fun drawLine(p1: PointEntity, p2: PointEntity, color: Color) {
+    protected fun drawLine(p1: PointEntity, p2: PointEntity, color: Color): Line =
 
         this.pointsGroup.line {
             startX = p1.x * maxWidth
@@ -56,7 +62,6 @@ abstract class CanvasView<T>: View() {
             endY   = p2.y * maxHeight
             stroke = color
         }
-    }
 
     /**
      * Draw the two points that defines the segment, and the line between them
