@@ -1,8 +1,7 @@
 object Versions {
 
-    const val kotlin                = "1.4.31"
-    const val gradle                = "4.1.2"
-    const val java                  = "1.8"
+    const val kotlin                = "1.5.0"
+    const val gradle                = "4.2.0"
     const val tornadoFX             = "1.7.20"
     const val coroutines            = "1.4.2"
 

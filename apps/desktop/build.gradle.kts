@@ -25,12 +25,3 @@ dependencies {
     implementation(project("${Modules.presentation}"))
     implementation(project("${Modules.domain}"))
 }
-
-tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = Versions.java
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = Versions.java
-    }
-}

@@ -109,6 +109,8 @@ object SweepLineAlgorithm: ISegmentIntersectionAlgorithm {
         // The sweepLine positions at the event.x
         this.sweepLine = event.value
 
+        recalculateSegmentValues()
+
         // There are 3 event types:
         when (event.type) {
             EventType.startSegmentPoint -> processStartSegmentPoint(event)
@@ -118,8 +120,6 @@ object SweepLineAlgorithm: ISegmentIntersectionAlgorithm {
     }
 
     private fun processStartSegmentPoint(event: Event) {
-
-        recalculateSegmentValues()
 
         event.segments?.first()?.let { segment ->
 
